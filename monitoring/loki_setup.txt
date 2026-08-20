@@ -1,0 +1,47 @@
+Loki Monitoring Setup Notes
+============================
+
+1. How Loki was started (local Docker, single-binary mode):
+
+   docker network create loki-net
+
+   docker run -d --name loki --network loki-net -p 3100:3100 \
+     grafana/loki:2.9.0 -config.file=/etc/loki/local-config.yaml
+
+   docker run -d --name grafana --network loki-net -p 3000:3000 \
+     grafana/grafana:latest
+
+   - Loki API available at:      http://localhost:3100
+   - Grafana UI available at:    http://localhost:3000 (default login admin/admin)
+
+2. Forwarding container logs to Loki (Docker logging driver):
+
+   Install the Loki Docker driver plugin once:
+
+   docker plugin install grafana/loki-docker-driver:latest --alias loki --grant-all-permissions
+
+   Run the hello.py container with logs shipped to Loki:
+
+   docker run --log-driver=loki \
+     --log-opt loki-url="http://localhost:3100/loki/api/v1/push" \
+     --log-opt loki-external-labels="job=hello-devops,container_name={{.Name}}" \
+     hello-devops:latest
+
+3. Viewing logs:
+
+   a) Via Grafana (recommended):
+      - Open http://localhost:3000
+      - Add a new Data Source -> Loki -> URL: http://loki:3100 -> Save & Test
+      - Go to Explore, select the Loki data source
+      - Query: {job="hello-devops"}
+
+   b) Via logcli (CLI, optional):
+      logcli --addr="http://localhost:3100" query '{job="hello-devops"}'
+
+4. For Nomad-based log forwarding, Nomad tasks can be configured with
+   the same docker logging driver options under the task's "config"
+   stanza (logging { type = "loki" ... }), or Promtail can be run as a
+   Nomad system job to tail allocation logs and push them to Loki.
+
+Screenshots (Grafana Explore view showing hello.py logs) are included
+in the README.md under the Monitoring section.
