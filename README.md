@@ -56,6 +56,10 @@ Expected output:
 Hello, DevOps!
 ```
 
+![Docker run output](screenshots/docker-run.png)
+
+![Docker run output](screenshots/docker-run.png)
+
 ---
 
 ## 4. CI/CD with GitHub Actions
@@ -123,6 +127,8 @@ VirtualBox VM running the same Docker/Nomad job.
 ## Repository Structure
 
 ```
+
+![Docker run output](screenshots/docker-run.png)
 devops-intern-final/
 ├── README.md
 ├── hello.py
