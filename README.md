@@ -95,22 +95,24 @@ nomad alloc logs <alloc-id>
 
 ## 6. Monitoring with Grafana Loki
 
-Loki + Grafana were run locally via Docker to collect and view container
-logs. Full setup, the log-forwarding command, and the query used to view
-logs are documented in [`monitoring/loki_setup.txt`](monitoring/loki_setup.txt).
+## 6. Monitoring with Grafana Loki
 
-Quick start:
+Loki, Grafana, and the Loki Docker logging driver were run on an AWS EC2
+instance to collect and view Docker container logs.
+
+### Start Loki and Grafana
 
 ```bash
-docker network create loki-net
-docker run -d --name loki --network loki-net -p 3100:3100 grafana/loki:2.9.0 -config.file=/etc/loki/local-config.yaml
-docker run -d --name grafana --network loki-net -p 3000:3000 grafana/grafana:latest
-```
+cd monitoring
+docker-compose up -d
 
-Then open Grafana at `http://localhost:3000`, add Loki (`http://loki:3100`)
-as a data source, and query `{job="hello-devops"}` in Explore.
+### Install the Loki Docker logging driver
 
-![Grafana Explore logs](screenshots/grafana-explore.png)
+```bash
+docker plugin install grafana/loki-docker-driver:latest \
+  --alias loki --grant-all-permissions
+
+
 
 ---
 
