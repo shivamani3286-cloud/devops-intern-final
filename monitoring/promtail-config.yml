@@ -1,4 +1,3 @@
-cat > promtail-config.yml <<'EOF'
 server:
   http_listen_port: 9080
   grpc_listen_port: 0
@@ -11,17 +10,12 @@ clients:
 
 scrape_configs:
   - job_name: hello-devops
-    docker_sd_configs:
-      - host: unix:///var/run/docker.sock
-        refresh_interval: 5s
+    static_configs:
+      - targets:
+          - localhost
+        labels:
+          job: hello-devops
+          __path__: /var/lib/docker/containers/*/*-json.log
 
-    relabel_configs:
-      - source_labels: ['__meta_docker_container_name']
-        regex: '/hello-devops'
-        action: keep
-
-      - source_labels: ['__meta_docker_container_name']
-        regex: '/hello-devops'
-        target_label: job
-        replacement: hello-devops
-EOF
+    pipeline_stages:
+      - docker: {}
