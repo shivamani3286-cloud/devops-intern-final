@@ -111,8 +111,7 @@ docker run -d --name grafana --network loki-net -p 3000:3000 grafana/grafana:lat
 Then open Grafana at `http://localhost:3000`, add Loki (`http://loki:3100`)
 as a data source, and query `{job="hello-devops"}` in Explore.
 
-*(Screenshot: Grafana Explore view showing `Hello, DevOps!` log line —
-add to `monitoring/` and link here.)*
+![Grafana Explore logs](screenshots/grafana-explore.png)
 
 ---
 
