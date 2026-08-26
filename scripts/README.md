@@ -159,6 +159,7 @@ The query displays the `Hello, DevOps!` container logs collected by Loki.
 
 ![Grafana Explore logs](https://raw.githubusercontent.com/shivamani3286-cloud/devops-intern-final/main/screenshots/grafana-explore.png)
 
+
 ---
 
 ## 7. Extra Credit (Optional)
