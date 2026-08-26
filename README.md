@@ -58,7 +58,6 @@ Hello, DevOps!
 
 ![Docker run output](screenshots/docker-run.png)
 
-![Docker run output](screenshots/docker-run.png)
 
 ---
 
