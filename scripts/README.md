@@ -56,7 +56,7 @@ Expected output:
 Hello, DevOps!
 ```
 
-![Docker run output](screenshots/docker-run.png)
+![Docker run output](https://raw.githubusercontent.com/shivamani3286-cloud/devops-intern-final/main/screenshots/docker-run.png)
 
 ---
 
@@ -157,8 +157,7 @@ Use the following query:
 
 The query displays the `Hello, DevOps!` container logs collected by Loki.
 
-![Grafana Explore logs](screenshots/grafana-explore.png)
-
+![Grafana Explore logs](https://raw.githubusercontent.com/shivamani3286-cloud/devops-intern-final/main/screenshots/grafana-explore.png)
 ---
 
 ## 7. Extra Credit (Optional)
