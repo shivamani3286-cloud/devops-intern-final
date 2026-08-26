@@ -127,7 +127,6 @@ VirtualBox VM running the same Docker/Nomad job.
 
 ```
 
-![Docker run output](screenshots/docker-run.png)
 devops-intern-final/
 ├── README.md
 ├── hello.py
